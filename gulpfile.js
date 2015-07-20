@@ -1,16 +1,17 @@
 var gulp = require('gulp');
 var plugin = require('gulp-load-plugins')({ lazy: true });
 var help = require('./tasks/task-help.js')(gulp);
-var config = {}; // plugin.odoConfigHelper.getConfig();
+var config =  require('./tasks/helper-config.js')().getConfig();
 
-require('./tasks/task-org-photos.js')(gulp, config, plugin, help);
+// Load up all of the custom tasks
+require('./tasks/task-photos.js')(gulp, config, plugin, help);
 
+// Default task is showing help
 gulp.task('default', ['help']);
 
 /*
 // get our config for use in all our tasks
 // hard wire our configuration helper right onto the plugin so we can pass it around
-plugin.odoConfigHelper =  require('./gulp/helper-config.js')();
 // All our custom tasks
 require('./gulp/task-config.js')(gulp, config, plugin, help);
 require('./gulp/task-clean.js')(gulp, config, plugin, help);

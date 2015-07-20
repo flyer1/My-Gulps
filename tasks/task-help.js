@@ -35,7 +35,7 @@ module.exports = function (gulp) {
 
 	function showBanner() {
 	    var fonts = new FONTS({
-	        'text': 'PHOTO', //text to be converted 
+	        'text': 'MY GULPS', //text to be converted 
 	        'font': 'block', //define the font face 
 	        'colors': ['magenta', 'magenta'], //define all colors 
 	        'background': 'Black', //define the background color 
@@ -44,15 +44,6 @@ module.exports = function (gulp) {
 	        'maxLength': '20' //define how many character can be on one line 
 	    });
 
-	    fonts = new FONTS({
-	        'text': 'ORGANIZER', //text to be converted 
-	        'font': 'block', //define the font face 
-	        'colors': ['blue', 'blue'], //define all colors 
-	        'background': 'Black', //define the background color 
-	        'letterSpacing': 1, //define letter spacing 
-	        'space': false, //define if the output text should have empty lines on top and on the bottom 
-	        'maxLength': '20' //define how many character can be on one line 
-	    });
 	}
 
 	function dumpList() {

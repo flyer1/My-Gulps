@@ -5,12 +5,12 @@ module.exports = function (gulp, config, plugin, help) {
 
     var doneCallback;
 
-    help.registerHelp('organize', {
+    help.registerHelp('photos', {
         name: 'Organizes a set of photos',
         description: 'Reads the source folder and moves each photo to a new folder, organized by the year and month of the creation date (TARGET_PATH/YYYY/MM/FILENAME.ext)',
     });
 
-    gulp.task('organize', function (done) {
+    gulp.task('photos', function (done) {
         // TODO: support command line args to control which type of image files to filter?
         // Collect up all of the image files in the source folder.
         // For each file:
@@ -18,6 +18,7 @@ module.exports = function (gulp, config, plugin, help) {
         //  - Ensure that the year exists as a folder in the target folder
         //  - Ensure that the month exists as a folder in the target folder (can do the last 2 in one step?)
         //  - Move the file to the target/yyyy/mm
+        console.log(config);
         doneCallback = done;
      
     });
