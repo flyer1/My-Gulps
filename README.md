@@ -1,4 +1,4 @@
-# Gulp-Photos-Organizer [![devDependency Status](https://img.shields.io/david/dev/flyer1/Gulp-Photos-Organizer.svg?style=flat)](https://david-dm.org/flyer1/Gulp-Photos-Organizer#info=devDependencies) 
+# Gulp-Photos-Organizer [![devDependency Status](https://img.shields.io/david/dev/flyer1/My-Gulps.svg?style=flat)](https://david-dm.org/flyer1/My-Gulps#info=devDependencies) 
 
 A gulp task to organize photos into directories
 
