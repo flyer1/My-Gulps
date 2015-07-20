@@ -22,51 +22,51 @@ module.exports = function (gulp) {
 	/* -------------------- IMPLEMENTATION ----------------------------------------- */
 	function printAllHelp() {
 
-	    var maxCol = 120;
+		var maxCol = 120;
 
-	    wl('');
-	    showBanner();
+		wl('');
+		showBanner();
 
-	    wl(chalk.white.bold(pad('', maxCol)));
-	    wl('');
+		wl(chalk.white.bold(pad('', maxCol)));
+		wl('');
 
-	    dumpList();
+		dumpList();
 	}
 
 	function showBanner() {
-	    var fonts = new FONTS({
-	        'text': 'MY GULPS', //text to be converted 
-	        'font': 'block', //define the font face 
-	        'colors': ['magenta', 'magenta'], //define all colors 
-	        'background': 'Black', //define the background color 
-	        'letterSpacing': 1, //define letter spacing 
-	        'space': false, //define if the output text should have empty lines on top and on the bottom 
-	        'maxLength': '20' //define how many character can be on one line 
-	    });
+		var fonts = new FONTS({
+			'text': 'MY GULPS', //text to be converted 
+			'font': 'block', //define the font face 
+			'colors': ['magenta', 'magenta'], //define all colors 
+			'background': 'Black', //define the background color 
+			'letterSpacing': 1, //define letter spacing 
+			'space': false, //define if the output text should have empty lines on top and on the bottom 
+			'maxLength': '20' //define how many character can be on one line 
+		});
 
 	}
 
 	function dumpList() {
 
-	    var maxCol = 120;
+		var maxCol = 120;
 
-	    var keys = Object.keys(help),
-                   i, len = keys.length;
-	    keys.sort();
+		var keys = Object.keys(help),
+				   i, len = keys.length;
+		keys.sort();
 
-	    for (i = 0; i < len; i++) {
-	        var taskHelp = help[keys[i]];
-	        w(chalk.yellow.bold(pad(keys[i] + ':',12, ' ')));
-	        wl(chalk.bold(taskHelp.name));
-	        wl(chalk.bold(taskHelp.description));
-	        //wl(chalk.bold(pad('', maxCol)));
-	    }
+		for (i = 0; i < len; i++) {
+			var taskHelp = help[keys[i]];
+			w(chalk.yellow.bold(pad(keys[i] + ':',12, ' ')));
+			wl(chalk.bold(taskHelp.name));
+			wl(chalk.bold(taskHelp.description));
+			//wl(chalk.bold(pad('', maxCol)));
+		}
 	}
 
-    // TODO: test this
+	// TODO: test this
 	function printHelp(taskName) {
 
-	    showBanner();
+		showBanner();
 
 		var maxCol = 120,
 			option,
@@ -78,7 +78,7 @@ module.exports = function (gulp) {
 		wl(chalk.bold(task.description));
 
 		if (task.options && task.options.length > 0) {
-		    wl(chalk.yellow.bold(pad('Options ', maxCol)));
+			wl(chalk.yellow.bold(pad('Options ', maxCol)));
 			for (var i = 0; i < task.options.length; i++) {
 				option = task.options[i];
 

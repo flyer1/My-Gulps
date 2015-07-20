@@ -1,23 +1,24 @@
 {
-    "version": "0.3.0",
-    "name": "My-Gulps",
-    "description": "",
-    "author": "Jon Kroeker",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/flyer1/My-Gulps"
-    },
-    "dependencies": {
-        "gulp": "^3.9"
-    },
-    "devDependencies": {
-        "cfonts": "0.0.13",
-        "chai": "^3.2.0",
-        "chalk": "^1.0.0",
-        "del": "^1.1.1",
-        "fs-extra": "^0.22.1",
-        "gulp-load-plugins": "^1.0.0-rc.1",
-        "yargs": "^3.15.0"
-    },
-    "license": "MIT"
+  "version": "0.3.0",
+  "name": "My-Gulps",
+  "description": "",
+  "author": "Jon Kroeker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flyer1/My-Gulps"
+  },
+  "dependencies": {
+    "gulp": "^3.9"
+  },
+  "devDependencies": {
+    "cfonts": "0.0.13",
+    "chai": "^3.2.0",
+    "chalk": "^1.0.0",
+    "del": "^1.1.1",
+    "fs-extra": "^0.22.1",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "lodash": "^3.10.0",
+    "yargs": "^3.15.0"
+  },
+  "license": "MIT"
 }

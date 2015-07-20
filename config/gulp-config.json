@@ -1,8 +1,10 @@
 {
     "photos": {
         "paths": {
-            "source": "../tests/new-photos",
-            "dest":  "../tests/pictures"
-        }
+            "source": "C:/_gulp/tests/new-photos/part 1",
+            "dest": "../tests/pictures",
+            "trash":  "C:/temp/trash"
+        },
+        "supportedTypes":  ["jpg", "jpeg","gif","png","mov","avi","mp4"]
     }
 }
