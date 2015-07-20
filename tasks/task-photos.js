@@ -1,4 +1,5 @@
-﻿var chalk = require('chalk');
+﻿var args = require('yargs').argv;
+var chalk = require('chalk');
 var fs = require('fs-extra');
 var _ = require('lodash');
 var path = require('path');
@@ -16,6 +17,11 @@ module.exports = function (gulp, config, plugin, help) {
     help.registerHelp('photos', {
         name: 'Organizes a set of photos',
         description: 'Reads the source folder and moves each photo to a new folder, organized by the year and month of the creation date (TARGET_PATH/YYYY/MM/FILENAME.ext)',
+        options: [
+           { name: '-help', description: 'displays this help' },
+           { name: '-simulate', description: 'simulates what the process would do without actually creating or moving anything' },
+           { name: '-quiet', description: "don't be so chatty about every step taken" },
+        ]
     });
 
     gulp.task('photos', function (done) {
@@ -23,6 +29,9 @@ module.exports = function (gulp, config, plugin, help) {
         try {
             var fileInfo;
             var ext;
+
+            help.printHelp('photos');
+            if (args.help) return;
 
             if (!preProcess()) return;
             
@@ -50,8 +59,10 @@ module.exports = function (gulp, config, plugin, help) {
 
         // Ensure that the destination base path exists
         if (!fs.existsSync(config.photos.paths.dest)) {
-            console.log(chalk.gray('Creating destination base path...'));
-            fs.mkdirSync(config.photos.paths.dest);
+            console.log(chalk.gray('Creating destination base path...' + (args.simulate ? "(simulating)": "")));
+            if (!args.simulate) {
+                fs.mkdirSync(config.photos.paths.dest);
+            }
         }
 
         return true;
@@ -83,6 +94,8 @@ module.exports = function (gulp, config, plugin, help) {
     }
 
     function ensurePathExists(fileInfo) {
+        if (args.simulate) return;
+
         if (!fs.existsSync(path.join(config.photos.paths.dest, fileInfo.year))) {
             fs.mkdirSync(path.join(config.photos.paths.dest, fileInfo.year));
         }
@@ -99,8 +112,12 @@ module.exports = function (gulp, config, plugin, help) {
         };
 
         try {
-            console.log(chalk.white('Processing ') + chalk.cyan(fileInfo.fileName) + chalk.white('...'));
-            fs.copySync(fileInfo.sourcePath, fileInfo.destPath, options);
+            if (!args.quiet) {
+                console.log(chalk.white(args.simulate ? 'Simulating: ' : 'Processing: ') + chalk.cyan(fileInfo.fileName) + chalk.white('...'));
+            }
+            if (!args.simulate) {
+                fs.copySync(fileInfo.sourcePath, fileInfo.destPath, options);
+            }
             summary.filesProcessed += 1;
         } catch (e) {
             console.log(chalk.red.bold(pad(e + " " + fileInfo.fileName, 100, '-')));
@@ -132,7 +149,7 @@ module.exports = function (gulp, config, plugin, help) {
 
     function postProcess() {
         console.log('\n');
-        console.log(chalk.yellow.bold(pad("  SUMMARY ", 100, '-')));
+        console.log(chalk.yellow.bold(pad("  SUMMARY " + (args.simulate ? "(simulated)" : ""), 100, '-')));
         console.log(chalk.green.bold("    Total Files: " + summary.totalFiles));
         console.log(chalk.green.bold("    Files Processed: " + summary.filesProcessed));
         console.log(chalk.green.bold("    Files Skipped: ") + chalk.yellow.bold(summary.filesSkipped));
