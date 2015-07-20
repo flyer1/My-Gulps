@@ -5,6 +5,7 @@ var config =  require('./tasks/helper-config.js')().getConfig();
 
 // Load up all of your custom gulp tasks here, each contained within their own file
 require('./tasks/task-photos.js')(gulp, config, plugin, help);
+require('./tasks/task-sample.js')(gulp, config, plugin, help);
 
 
 // Default task is showing help

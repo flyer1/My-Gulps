@@ -27,7 +27,7 @@ module.exports = function (gulp) {
 		wl('');
 		showBanner();
 
-		wl(chalk.white.bold(pad('', maxCol)));
+		wl(chalk.gray(pad('', maxCol)));
 		wl('');
 
 		dumpList();
@@ -59,11 +59,10 @@ module.exports = function (gulp) {
 			w(chalk.yellow.bold(pad(keys[i] + ':',12, ' ')));
 			wl(chalk.bold(taskHelp.name));
 			wl(chalk.bold(taskHelp.description));
-			//wl(chalk.bold(pad('', maxCol)));
+			wl(chalk.gray(pad('', maxCol)));
 		}
 	}
 
-	// TODO: test this
 	function printHelp(taskName) {
 
 		showBanner();
@@ -104,7 +103,7 @@ module.exports = function (gulp) {
 	}
 
 	function pad(s, l, c) {
-		while (s.length < l) s += c || '_';
+		while (s.length < l) s += c || '-';
 		return s;
 	}
 };
