@@ -38,3 +38,6 @@ Or run a task by name:
 ```
 gulp photos
 ```
+
+### Credits
+Credit goes to Roy Drenker who created the original structure of this project.
