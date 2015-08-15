@@ -1,8 +1,8 @@
 {
     "photos": {
         "paths": {
-            "source": "/Users/jon/Pictures/Last-Import/test",
-            "dest": "/Users/jon/Pictures/Ella/test"
+            "source": "/Users/jon/Pictures/Last-Import/source",
+            "dest": "/Users/jon/Pictures/Ella"
         },
         "supportedTypes":  ["jpg", "jpeg","gif","png","mov","avi","mp4"]
     }
