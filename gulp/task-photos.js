@@ -110,8 +110,8 @@ module.exports = function (gulp, config, plugin, help) {
 
         function processFile(fileInfo) {
             var options = {
-                "clobber": false
-                //"preserveTimestamps": true,
+                "clobber": false,
+                "preserveTimestamps": true,
             };
 
             try {
@@ -119,18 +119,10 @@ module.exports = function (gulp, config, plugin, help) {
                     console.log(chalk.white(args.simulate ? 'Simulating: ' : 'Processing: ') + chalk.cyan(fileInfo.destPath) + chalk.white('...'));
                 }
                 if (!args.simulate) {
-                    fs.move(fileInfo.sourcePath, fileInfo.destPath, options, function (err) {
-                        if (err) {
-                            console.log(err);
-                            summary.filesWithErrors += 1;
-                            console.log(summary);
-                        } else {
-                            summary.filesProcessed += 1;
-                        }
-                    });
-                    //fs.copySync(fileInfo.sourcePath, fileInfo.destPath, options);
+                    fs.copySync(fileInfo.sourcePath, fileInfo.destPath, options);
+                    fs.removeSync(fileInfo.sourcePath);
+                    summary.filesProcessed += 1;
                 }
-
             } catch (e) {
                 console.log(chalk.red.bold(pad(e + " " + fileInfo.fileName, 100, '-')));
                 summary.filesWithErrors += 1;
@@ -166,7 +158,6 @@ module.exports = function (gulp, config, plugin, help) {
             console.log(chalk.green.bold("    Files Processed: " + summary.filesProcessed));
             console.log(chalk.green.bold("    Files Skipped: ") + chalk.yellow.bold(summary.filesSkipped));
             console.log(chalk.green.bold("    Errors: ") + chalk.red.bold(summary.filesWithErrors));
-            console.log(summary);
         }
 
         function pad(s, l, c) {
