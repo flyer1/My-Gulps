@@ -91,14 +91,20 @@ module.exports = function (gulp, config, plugin, help) {
         }
 
         function ensurePathExists(fileInfo) {
-            if (args.simulate) return;
-
-            if (!fs.existsSync(path.join(config.photos.paths.dest, fileInfo.year))) {
-                fs.mkdirSync(path.join(config.photos.paths.dest, fileInfo.year));
+            var destPath = path.join(config.photos.paths.dest, fileInfo.year);
+            if (!fs.existsSync(destPath)) {
+                console.log(chalk.gray('Creating destination path (year)...' + destPath + (args.simulate ? " (simulating)": "")));
+                if (!args.simulate) {
+                    fs.mkdirSync(path.join(destPath));
+                }
             }
 
-            if (!fs.existsSync(path.join(config.photos.paths.dest, fileInfo.year, fileInfo.month))) {
-                fs.mkdirSync(path.join(config.photos.paths.dest, fileInfo.year, fileInfo.month));
+            destPath = path.join(config.photos.paths.dest, fileInfo.year, fileInfo.month);
+            if (!fs.existsSync(destPath)) {
+                console.log(chalk.gray('Creating destination path (month)...' + destPath + (args.simulate ? " (simulating)": "")));
+                if (!args.simulate) {
+                    fs.mkdirSync(destPath);
+                }
             }
         }
 

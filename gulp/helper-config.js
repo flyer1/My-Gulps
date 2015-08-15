@@ -1,16 +1,16 @@
 module.exports = function () {
-	
-	var config = require('../config/gulp-config.json');
+
+	var config = require('./gulp-config.json');
 
 	var service = {
 		 getConfig: getConfig,
 	};
-	
+
 	return service;
 
 	////////////////////////////////// IMPLEMENTATION /////////////////////////////////
 
-	function getConfig() {		
+	function getConfig() {
 		return config;
 	}
 }
