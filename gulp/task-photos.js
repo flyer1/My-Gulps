@@ -3,6 +3,7 @@ var chalk = require('chalk');
 var fs = require('fs-extra');
 var _ = require('lodash');
 var path = require('path');
+var pretty = require('prettysize');
 
 module.exports = function (gulp, config, plugin, help) {
 
@@ -23,6 +24,7 @@ module.exports = function (gulp, config, plugin, help) {
             var summary = {
                 totalFiles: 0,
                 filesProcessed: 0,
+                filesProcessedSize: 0,
                 filesSkipped: 0,
                 filesWithErrors: 0
             };
@@ -122,6 +124,7 @@ module.exports = function (gulp, config, plugin, help) {
                     fs.copySync(fileInfo.sourcePath, fileInfo.destPath, options);
                     fs.removeSync(fileInfo.sourcePath);
                     summary.filesProcessed += 1;
+                    summary.filesProcessedSize += fileInfo.size;
                 }
             } catch (e) {
                 console.log(chalk.red.bold(pad(e + " " + fileInfo.fileName, 100, '-')));
@@ -138,15 +141,19 @@ module.exports = function (gulp, config, plugin, help) {
                 sourcePath: "",
                 destPath: "",
                 destFolder: "",
+                size: 0,
             };
 
             fileInfo.sourcePath = path.join(config.photos.paths.source, fileName);
-            var creationTime = new Date(fs.statSync(fileInfo.sourcePath).birthtime);
+            var stat = fs.statSync(fileInfo.sourcePath);
+
+            var creationTime = new Date(stat.birthtime);
             fileInfo.year = creationTime.getFullYear().toString();
             fileInfo.month = ("0" + (creationTime.getMonth() + 1)).slice(-2);
             fileInfo.fileName = fileName;
             fileInfo.destFolder = path.join(config.photos.paths.dest, fileInfo.year, fileInfo.month);
             fileInfo.destPath = path.join(fileInfo.destFolder, fileName);
+            fileInfo.size = stat.size;
 
             return fileInfo;
         }
@@ -156,6 +163,7 @@ module.exports = function (gulp, config, plugin, help) {
             console.log(chalk.yellow.bold(pad("  SUMMARY " + (args.simulate ? "(simulated)" : ""), 100, '-')));
             console.log(chalk.green.bold("    Total Files: " + summary.totalFiles));
             console.log(chalk.green.bold("    Files Processed: " + summary.filesProcessed));
+            console.log(chalk.green.bold("    Files Processed Size: " + pretty(summary.filesProcessedSize)));
             console.log(chalk.green.bold("    Files Skipped: ") + chalk.yellow.bold(summary.filesSkipped));
             console.log(chalk.green.bold("    Errors: ") + chalk.red.bold(summary.filesWithErrors));
         }
