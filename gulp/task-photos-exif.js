@@ -41,7 +41,7 @@ module.exports = function (gulp, config, plugin, help) {
             var fileInfos = [];
             var ext;
 
-            help.printHelp('photos');
+            help.printHelp('photos-exif');
             if (args.help) return;
 
             if (!preProcess()) return;
